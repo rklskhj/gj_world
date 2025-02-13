@@ -4,6 +4,7 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { MovingModel } from "./MovingModel";
 import { useState } from "react";
+import { AmbientLight } from "three";
 
 export function FloatingShiba() {
   const COUNT = 120;
@@ -33,7 +34,7 @@ export function FloatingShiba() {
             speed={speed}
           />
         ))}
-        <ambientLight intensity={1} />
+        <primitive object={new AmbientLight(0xffffff, 1)} />
         <Environment preset="forest" />
       </Canvas>
     </div>
