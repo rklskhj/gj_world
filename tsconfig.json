@@ -12,6 +12,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["react"],
     "incremental": true,
     "plugins": [
       {
@@ -26,10 +28,12 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "types.d.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
     "build/types/**/*.ts",
-    "next.config.cjs"
-, "tailwind.config.js"  ],
+    "next.config.cjs",
+    "tailwind.config.js"
+  ],
   "exclude": ["node_modules"]
 }
