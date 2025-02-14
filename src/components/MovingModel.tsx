@@ -39,7 +39,8 @@ export function MovingModel({
       if (ref.current) {
         ref.current.position.set(
           index === 0 ? 0 : data.x * width,
-          (data.y += dt * speed),
+          // 위로 올라가는 속도를 조절합니다. (증감시 위로, 감소시 아래로)
+          (data.y -= dt * speed),
           -z
         );
       }
@@ -52,8 +53,12 @@ export function MovingModel({
       );
     }
     // 지정된 높이 이상을 올라갔다면(화면 밖으로 벗어나간 다음 그 이상) 다시 아래로 위치를 변경합니다.
-    if (data.y > height * (index === 0 ? 4 : 1))
-      data.y = -(height * (index === 0 ? 4 : 1));
+    // 위로 효과를 줄 때는 주석된 코드 사용.
+    // if (data.y > height * (index === 0 ? 4 : 1))
+    //   data.y = -(height * (index === 0 ? 4 : 1));
+    if (data.y < -height * (index === 0 ? 4 : 1)) {
+      data.y = height * (index === 0 ? 4 : 1);
+    }
   });
   return (
     <mesh ref={ref}>
