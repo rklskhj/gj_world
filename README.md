@@ -1,4 +1,4 @@
-# 🌏 GJ, WORLD
+# 🌏 GJ, WORLD<a id="top"></a>
 
 <br/>
 <div align="center">
@@ -12,7 +12,7 @@
 ## 프로젝트
 포트폴리오 사이트입니다.
 
-<p align="right"><a href="#🌏-gj-world">맨 위로 가기 ⬆️</a></p>
+<p align="right"><a href="#top">맨 위로 가기 ⬆️</a></p>
 
 ### 🛠️ 기술 스택
 <div>
@@ -23,4 +23,4 @@
     <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
 </div>
 
-<p align="right"><a href="#🌏-gj-world">맨 위로 가기 ⬆️</a></p>
+<p align="right"><a href="#top">맨 위로 가기 ⬆️</a></p>
