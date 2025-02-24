@@ -1,5 +1,4 @@
-import { FloatingShiba } from "@/components/FloatingShiba";
-// import ClientScene from "@/components/ClientScene";
+import FloatingShiba from "@/components/FloatingShiba";
 import LandingOverlay from "@/components/LandingOverlay";
 
 export default function Home() {
