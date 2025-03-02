@@ -3,7 +3,7 @@ import LandingOverlay from "@/components/LandingOverlay";
 
 export default function Home() {
   return (
-    <div>
+    <div className="relative w-full h-screen">
       <FloatingShiba />
       <LandingOverlay />
     </div>

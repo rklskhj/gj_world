@@ -1,4 +1,3 @@
-// import IconLoader from "@/components/IconLoader";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 
@@ -15,10 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="kr">
-      <body>
-        {children}
-        {/* <IconLoader /> */}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

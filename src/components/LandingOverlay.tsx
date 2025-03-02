@@ -1,6 +1,6 @@
 "use client";
 
-// import Link from "next/link";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { SparklesCore } from "./ui/sparkles";
 
@@ -36,15 +36,14 @@ export default function LandingOverlay() {
         </h1>
       </div>
       <div className="w-full flex justify-center relative z-20">
-        {/* // TODO: 포스트 완성 후 복구 */}
-        {/* <Link href="/posts/all" className="z-10"> */}
-        <button disabled className="p-[3px] relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-ai-blue via-ai-purple to-ai-pink  rounded-sm pointer-events-none" />
-          <div className="px-8 py-2 bg-black rounded-sm relative transition duration-200 text-white group-hover:bg-transparent  font-bold">
-            Get Started
-          </div>
-        </button>
-        {/* </Link> */}
+        <Link href="/projects" className="z-10">
+          <button className="p-[3px] relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-ai-blue via-ai-purple to-ai-pink rounded-sm pointer-events-none" />
+            <div className="px-8 py-2 bg-black rounded-sm relative transition duration-200 text-white group-hover:bg-transparent font-bold">
+              Get Started
+            </div>
+          </button>
+        </Link>
       </div>
       <div className="w-full absolute inset-0 h-screen z-10">
         <SparklesCore
