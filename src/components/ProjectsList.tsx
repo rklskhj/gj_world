@@ -19,7 +19,7 @@ export default function ProjectsList() {
   // }, []);
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="container mx-auto w-full h-screen pt-14">
       <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />

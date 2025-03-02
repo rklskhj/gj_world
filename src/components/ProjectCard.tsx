@@ -100,7 +100,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="flex flex-col h-96 w-64 rounded-xl bg-gradient-to-br from-indigo-400 to-violet-400 p-4 shadow-lg overflow-hidden group"
+      className="flex flex-col h-96 w-80 rounded-xl bg-gradient-to-br from-indigo-400 to-violet-400 p-4 shadow-lg overflow-hidden group"
       style={{
         transformStyle: "preserve-3d", // 3D 변환 효과 유지
         rotateX, // X축 회전 (위/아래 움직임)
@@ -120,7 +120,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         }}
       />
       <div className="relative w-full aspect-square rounded-md overflow-hidden">
-        <Image src="/profile.png" alt="Profile Picture" fill />
+        <Image
+          src="/profile.png"
+          alt="Profile Picture"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
 
       <div className="flex flex-col gap-0 mt-4">
