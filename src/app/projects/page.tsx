@@ -1,6 +1,6 @@
 import ProjectsList from "@/components/ProjectsList";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { SparklesCore } from "@/components/ui/sparkles";
 
 export default function Projects() {
