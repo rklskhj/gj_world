@@ -18,6 +18,9 @@ module.exports = {
         "ai-purple": "#B84FFF",
         "ai-pink": "#FF3D77",
       },
+      fontFamily: {
+        sans: ['"Pretendard Variable"', "Pretendard" /* 기타 폴백 폰트 */],
+      },
     },
   },
   plugins: [],

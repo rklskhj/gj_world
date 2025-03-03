@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Providers } from "@/lib/providers";
 
 export const metadata: Metadata = {
   title: "GJ, World | 김혁진",
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="kr" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
