@@ -1,6 +1,6 @@
 import ProjectDetail from "@/components/ProjectDetail";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 import { SparklesCore } from "@/components/ui/sparkles";
 
 /**
