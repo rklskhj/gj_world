@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Project } from "@/data/projects";
-import { motion, useTransform, useSpring } from "framer-motion";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useRef, useState } from "react";
 import SkillTagLabel from "@/components/SkillTagLabel";
 
 interface ProjectCardProps {
@@ -17,33 +16,14 @@ const cardScale = 1.07;
 const sheenSize = 500;
 
 export default function ProjectCard({ project, onClick }: ProjectCardProps) {
-  // useSpring: 부드러운 애니메이션을 위한 값 생성, bounce: 0은 튕김 효과 없이 부드럽게 전환
-  // xPcnt, yPcnt: 마우스 위치의 상대적 비율 (-0.5 ~ 0.5 범위)
-  const xPcnt = useSpring(0, { bounce: 0 });
-  const yPcnt = useSpring(0, { bounce: 0 });
-  // scale: 카드 크기 조절을 위한 값 (기본값 1)
-  const scale = useSpring(1, { bounce: 0 });
-  // mouseX, mouseY: 카드 내 마우스의 절대 위치 (픽셀 단위)
-  const mouseX = useSpring(0, { bounce: 0 });
-  const mouseY = useSpring(0, { bounce: 0 });
+  // 마우스 위치 상태 관리
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [scale, setScale] = useState(1);
+  const [sheenPosition, setSheenPosition] = useState({ x: 0, y: 0 });
 
-  // useTransform: 입력값을 출력값으로 매핑
-  // yPcnt 값을 기반으로 X축 회전 각도 계산 (위/아래 움직임에 따른 회전)
-  const rotateX = useTransform(
-    yPcnt,
-    [-0.5, 0.5],
-    [`-${cardRoation}deg`, `${cardRoation}deg`]
-  );
-  // xPcnt 값을 기반으로 Y축 회전 각도 계산 (좌/우 움직임에 따른 회전)
-  const rotateY = useTransform(
-    xPcnt,
-    [-0.5, 0.5],
-    [`-${cardRoation}deg`, `${cardRoation}deg`]
-  );
-
-  // 광택 효과의 위치 계산 (마우스 위치에서 광택 크기의 절반을 빼서 중앙 정렬)
-  const sheenX = useTransform(() => mouseX.get() - sheenSize / 2);
-  const sheenY = useTransform(() => mouseY.get() - sheenSize / 2);
+  // 컨테이너 참조 생성
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // 마우스 이벤트에서 상대적 위치 계산 함수
   const getMousePosition = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -69,12 +49,18 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
       getMousePosition(e);
 
     // 마우스 위치를 -0.5 ~ 0.5 범위의 비율로 변환
-    xPcnt.set(currentMouseX / containerWidth - 0.5);
-    yPcnt.set(currentMouseY / containerHeight - 0.5);
+    const xPct = currentMouseX / containerWidth - 0.5;
+    const yPct = currentMouseY / containerHeight - 0.5;
 
-    // 광택 효과를 위한 마우스 절대 위치 저장
-    mouseX.set(currentMouseX);
-    mouseY.set(currentMouseY);
+    // 회전 각도 계산
+    setRotateX(-yPct * cardRoation);
+    setRotateY(xPct * cardRoation);
+
+    // 광택 효과 위치 계산
+    setSheenPosition({
+      x: currentMouseX - sheenSize / 2,
+      y: currentMouseY - sheenSize / 2,
+    });
   };
 
   // 마우스가 요소에 진입할 때 호출되는 핸들러
@@ -82,19 +68,21 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
     const { currentMouseX, currentMouseY } = getMousePosition(e);
 
     // 카드 확대 효과 적용
-    scale.set(cardScale);
+    setScale(cardScale);
 
     // 광택 효과 위치 초기화
-    mouseX.set(currentMouseX);
-    mouseY.set(currentMouseY);
+    setSheenPosition({
+      x: currentMouseX - sheenSize / 2,
+      y: currentMouseY - sheenSize / 2,
+    });
   };
 
   // 마우스가 요소를 떠날 때 호출되는 핸들러
   const handleMouseLeave: MouseEventHandler = () => {
     // 모든 효과를 기본값으로 리셋
-    scale.set(1);
-    xPcnt.set(0);
-    yPcnt.set(0);
+    setScale(1);
+    setRotateX(0);
+    setRotateY(0);
   };
 
   // 클릭 이벤트 핸들러 추가
@@ -105,28 +93,29 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   };
 
   return (
-    <motion.div
+    <div
+      ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      className="flex flex-col h-96 w-80 rounded-xl bg-gradient-to-br from-indigo-400 to-violet-400 p-4 shadow-lg overflow-hidden group cursor-pointer"
+      className="flex flex-col h-96 w-80 rounded-xl bg-gradient-to-br from-white to-gray-400 dark:from-gray-800 dark:to-gray-500  p-4 shadow-lg overflow-hidden group cursor-pointer"
       style={{
-        transformStyle: "preserve-3d", // 3D 변환 효과 유지
-        rotateX, // X축 회전 (위/아래 움직임)
-        rotateY, // Y축 회전 (좌/우 움직임)
-        scale, // 크기 조절 (호버 시 확대)
+        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
+        transformStyle: "preserve-3d",
+        transition: "transform 0.1s ease-out",
       }}
     >
       {/* 광택 효과 (마우스를 따라다니는 흰색 그라데이션) */}
-      <motion.div
+      <div
         className="absolute z-10 opacity-0 group-hover:opacity-20 transition-opacity duration-200 rounded-full blur-md"
         style={{
           background: "radial-gradient(white, #3984ff00 80%)",
-          left: sheenX,
-          top: sheenY,
+          left: sheenPosition.x,
+          top: sheenPosition.y,
           height: sheenSize,
           width: sheenSize,
+          pointerEvents: "none",
         }}
       />
       <div className="relative w-full aspect-square rounded-md overflow-hidden">
@@ -197,6 +186,6 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
