@@ -269,8 +269,10 @@ export default function ProjectDetail({ id }: ProjectDetailProps) {
           <div className="flex items-center gap-2">
             <FaUsers className="text-primary" />
             <span>
-              {project.team.map((t) => {
-                return t.role + " " + t.members + ", ";
+              {project.team.map((t, index) => {
+                return `${t.role} ${t.members}${
+                  index < project.team.length - 1 ? ", " : ""
+                }`;
               })}
             </span>
           </div>

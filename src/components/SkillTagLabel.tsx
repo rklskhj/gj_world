@@ -4,7 +4,8 @@ const skillColors: Record<string, string> = {
   react: "#61DAFB",
   "next.js": "#000000",
   nextjs: "#000000",
-  vue: "#4FC08D",
+  "vue.js": "#4FC08D",
+  vuejs: "#4FC08D",
   angular: "#DD0031",
   svelte: "#FF3E00",
   typescript: "#3178C6",
@@ -16,6 +17,12 @@ const skillColors: Record<string, string> = {
   bootstrap: "#7952B3",
   redux: "#764ABC",
   graphql: "#E10098",
+  "react-query": "#FF4785",
+  zustand: "#433D37",
+  "three.js": "#000000",
+  r3f: "#10577B",
+  stylus: "#333333",
+  pinia: "#F7D336",
 
   // 백엔드
   node: "#339933",
