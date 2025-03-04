@@ -1,9 +1,15 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { fetchProjects, fetchProjectById } from "@/lib/api/projects";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import {
+  fetchProjects,
+  fetchProjectById,
+  fetchAllProjects,
+  PaginatedResponse,
+} from "@/lib/api/projects";
 import { useProjectStore } from "@/store/projectStore";
 import { useEffect } from "react";
+import { Project } from "@/data/projects";
 
 /**
  * React Query 커스텀 훅 가이드
@@ -25,13 +31,25 @@ import { useEffect } from "react";
  *    - 키가 변경되면 쿼리가 자동으로 다시 실행됨
  */
 
-// 모든 프로젝트 가져오기
-export function useProjects() {
+// 무한 스크롤로 프로젝트 가져오기
+export function useProjects(limit = 9) {
+  return useInfiniteQuery<PaginatedResponse<Project>, Error>({
+    // 쿼리 키: 'projects'와 limit으로 식별되는 쿼리
+    queryKey: ["projects", limit],
+    // 쿼리 함수: 페이지 정보를 받아 해당 페이지의 프로젝트 목록을 가져오는 API 호출
+    queryFn: ({ pageParam }) => fetchProjects(pageParam as number, limit),
+    // 다음 페이지 파라미터 결정 함수
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    // 초기 페이지 파라미터
+    initialPageParam: 1,
+  });
+}
+
+// 모든 프로젝트 가져오기 (이전 버전 호환성 유지)
+export function useAllProjects() {
   return useQuery({
-    // 쿼리 키: 'projects'로 식별되는 쿼리
-    queryKey: ["projects"],
-    // 쿼리 함수: 프로젝트 목록을 가져오는 API 호출
-    queryFn: fetchProjects,
+    queryKey: ["allProjects"],
+    queryFn: fetchAllProjects,
   });
 }
 

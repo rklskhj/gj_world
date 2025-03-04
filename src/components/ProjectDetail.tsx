@@ -4,7 +4,7 @@ import { useProject } from "@/lib/hooks/useProjects";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import SkillTag from "./SkillTagLabel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useProjects } from "@/lib/hooks/useProjects";
 import {
   FaUsers,
@@ -45,7 +45,12 @@ interface ProjectDetailProps {
 export default function ProjectDetail({ id }: ProjectDetailProps) {
   const router = useRouter();
   const { data: project, isLoading, isError } = useProject(id);
-  const { data: allProjects = [] } = useProjects();
+  const { data } = useProjects();
+
+  // 무한 스크롤 데이터에서 모든 프로젝트를 평면화된 배열로 변환
+  const allProjects = useMemo(() => {
+    return data?.pages.flatMap((page) => page.data) || [];
+  }, [data]);
 
   // 페이드인 효과를 위한 상태
   const [isVisible, setIsVisible] = useState(false);
@@ -360,68 +365,70 @@ export default function ProjectDetail({ id }: ProjectDetailProps) {
         </div>
 
         {/* 문제 해결 */}
-        <div className="mt-4">
-          <div
-            className="flex justify-between items-center gap-2 mb-4 cursor-pointer"
-            onClick={() => setIsTroubleExpanded(!isTroubleExpanded)}
-          >
-            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-              Trouble Shooting
-            </h3>
-            <span className="text-primary text-sm flex items-center gap-1">
-              {isTroubleExpanded ? (
-                <>
-                  <FaChevronUp className="text-primary transition-transform" />
-                </>
-              ) : (
-                <>
-                  <FaChevronDown className="text-primary transition-transform" />
-                </>
-              )}
-            </span>
-          </div>
+        {project.trouble.length > 0 && (
+          <div className="mt-4">
+            <div
+              className="flex justify-between items-center gap-2 mb-4 cursor-pointer"
+              onClick={() => setIsTroubleExpanded(!isTroubleExpanded)}
+            >
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">
+                Trouble Shooting
+              </h3>
+              <span className="text-primary text-sm flex items-center gap-1">
+                {isTroubleExpanded ? (
+                  <>
+                    <FaChevronUp className="text-primary transition-transform" />
+                  </>
+                ) : (
+                  <>
+                    <FaChevronDown className="text-primary transition-transform" />
+                  </>
+                )}
+              </span>
+            </div>
 
-          <AnimatePresence initial={false}>
-            {isTroubleExpanded && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{
-                  height: "auto",
-                  opacity: 1,
-                  transition: {
-                    height: { duration: 0.5, ease: "easeInOut" },
-                    opacity: { duration: 0.3, ease: "easeIn" },
-                  },
-                }}
-                exit={{
-                  height: 0,
-                  opacity: 0,
-                  transition: {
-                    height: { duration: 0.4, ease: "easeInOut" },
-                    opacity: { duration: 0.2, ease: "easeOut" },
-                  },
-                }}
-                style={{ overflow: "hidden" }}
-              >
-                <div className="flex flex-col gap-2 mb-8">
-                  {project.trouble.map((t) => (
-                    <div key={t.title} className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2 break-keep">
-                        <FaExclamationCircle className="text-red-500 flex-shrink-0" />
-                        <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                          {t.title}
+            <AnimatePresence initial={false}>
+              {isTroubleExpanded && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: "auto",
+                    opacity: 1,
+                    transition: {
+                      height: { duration: 0.5, ease: "easeInOut" },
+                      opacity: { duration: 0.3, ease: "easeIn" },
+                    },
+                  }}
+                  exit={{
+                    height: 0,
+                    opacity: 0,
+                    transition: {
+                      height: { duration: 0.4, ease: "easeInOut" },
+                      opacity: { duration: 0.2, ease: "easeOut" },
+                    },
+                  }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="flex flex-col gap-2 mb-8">
+                    {project.trouble.map((t) => (
+                      <div key={t.title} className="flex flex-col gap-2">
+                        <div className="flex items-center gap-2 break-keep">
+                          <FaExclamationCircle className="text-red-500 flex-shrink-0" />
+                          <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                            {t.title}
+                          </span>
+                        </div>
+                        <span className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line break-keep">
+                          {t.content}
                         </span>
                       </div>
-                      <span className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line break-keep">
-                        {t.content}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
 
         {/* 프로젝트 링크 버튼 */}
         <div className="flex justify-end gap-4">

@@ -18,17 +18,48 @@ import { Project, MOCK_PROJECTS } from "@/data/projects";
  *    - 실제 API 연동 시 함수 내부만 수정 (인터페이스 유지)
  */
 
-// 모든 프로젝트 가져오기
-export async function fetchProjects(): Promise<Project[]> {
+// 페이지네이션을 위한 응답 타입 정의
+export interface PaginatedResponse<T> {
+  data: T[];
+  nextPage: number | null;
+  totalPages: number;
+  hasMore: boolean;
+}
+
+// 프로젝트 목록 페이지네이션 가져오기
+export async function fetchProjects(
+  page = 1,
+  limit = 9
+): Promise<PaginatedResponse<Project>> {
   // 실제 API 호출로 대체 가능
-  // const response = await fetch('/api/projects');
+  // const response = await fetch(`/api/projects?page=${page}&limit=${limit}`);
   // return response.json();
 
   // 현재는 목업 데이터 사용 (API 호출 시뮬레이션)
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(MOCK_PROJECTS);
+      const startIndex = (page - 1) * limit;
+      const endIndex = startIndex + limit;
+      const paginatedData = MOCK_PROJECTS.slice(startIndex, endIndex);
+      const totalPages = Math.ceil(MOCK_PROJECTS.length / limit);
+      const hasMore = page < totalPages;
+
+      resolve({
+        data: paginatedData,
+        nextPage: hasMore ? page + 1 : null,
+        totalPages,
+        hasMore,
+      });
     }, 500); // 실제 API 호출을 시뮬레이션하기 위한 지연
+  });
+}
+
+// 모든 프로젝트 가져오기 (이전 버전 호환성 유지)
+export async function fetchAllProjects(): Promise<Project[]> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(MOCK_PROJECTS);
+    }, 500);
   });
 }
 

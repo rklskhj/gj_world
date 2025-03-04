@@ -23,6 +23,8 @@ const skillColors: Record<string, string> = {
   r3f: "#10577B",
   stylus: "#333333",
   pinia: "#F7D336",
+  "styled-components": "#DB7093",
+  recoil: "#3578E5",
 
   // 백엔드
   node: "#339933",
@@ -40,6 +42,7 @@ const skillColors: Record<string, string> = {
   dotnet: "#512BD4",
   go: "#00ADD8",
   rust: "#000000",
+  python: "#306998",
 
   // 데이터베이스
   mysql: "#4479A1",
