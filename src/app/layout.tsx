@@ -5,7 +5,7 @@ import { Providers } from "@/lib/providers";
 
 export const metadata: Metadata = {
   title: "GJ, World | 김혁진",
-  description: "프론트엔드 기술 학습 및 공유를 합니다.",
+  description: "안녕하세요! 프론트엔드 개발자 김혁진입니다.",
   icons: { icon: "/icon.ico" },
 };
 
