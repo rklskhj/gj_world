@@ -43,7 +43,7 @@ export default function ProjectsList() {
   };
 
   return (
-    <div className="container mx-auto w-full h-screen pt-14 pb-14 mb-20">
+    <div className="container mx-auto w-full pt-14 pb-14 mb-20">
       {/* 로딩 상태에 따른 조건부 렌더링 */}
       {isLoading ? (
         // 로딩 중일 때 스켈레톤 UI 표시

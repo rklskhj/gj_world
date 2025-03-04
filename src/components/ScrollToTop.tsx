@@ -41,7 +41,7 @@ export default function ScrollToTop({ threshold = 120 }: ScrollToTopProps) {
   return (
     <AnimatePresence>
       {showButton && (
-        <div className="fixed bottom-28 right-12 max-[425px]:right-4 max-[425px]:bottom-36 z-50">
+        <div className="fixed bottom-28 right-12 max-[425px]:right-4 z-50">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}

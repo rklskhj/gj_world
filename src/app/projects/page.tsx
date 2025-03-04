@@ -5,9 +5,11 @@ import { SparklesCore } from "@/components/ui/sparkles";
 
 export default function Projects() {
   return (
-    <div className="relative w-full">
-      <Header />
-      <ProjectsList />
+    <div className="relative flex flex-col justify-between min-h-screen w-full">
+      <div>
+        <Header />
+        <ProjectsList />
+      </div>
       <div className="w-full absolute inset-0 -z-10">
         <SparklesCore
           id="tsparticlesfullpage"

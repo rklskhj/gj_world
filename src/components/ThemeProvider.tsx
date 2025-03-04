@@ -1,8 +1,8 @@
 "use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ReactNode } from "react";
+import { ClientThemeWrapper } from "./ClientThemeWrapper";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  return <NextThemesProvider attribute="class">{children}</NextThemesProvider>;
+  return <ClientThemeWrapper>{children}</ClientThemeWrapper>;
 }
