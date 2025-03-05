@@ -1,4 +1,4 @@
-import { Project, MOCK_PROJECTS } from "@/data/projects";
+import { Project } from "@/data/projects";
 
 /**
  * API 함수 설계 가이드
@@ -31,52 +31,41 @@ export async function fetchProjects(
   page = 1,
   limit = 9
 ): Promise<PaginatedResponse<Project>> {
-  // 실제 API 호출로 대체 가능
-  // const response = await fetch(`/api/projects?page=${page}&limit=${limit}`);
-  // return response.json();
+  // 실제 API 호출
+  const response = await fetch(`/api/projects?page=${page}&limit=${limit}`);
 
-  // 현재는 목업 데이터 사용 (API 호출 시뮬레이션)
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const startIndex = (page - 1) * limit;
-      const endIndex = startIndex + limit;
-      const paginatedData = MOCK_PROJECTS.slice(startIndex, endIndex);
-      const totalPages = Math.ceil(MOCK_PROJECTS.length / limit);
-      const hasMore = page < totalPages;
+  if (!response.ok) {
+    throw new Error("Failed to fetch projects");
+  }
 
-      resolve({
-        data: paginatedData,
-        nextPage: hasMore ? page + 1 : null,
-        totalPages,
-        hasMore,
-      });
-    }, 500); // 실제 API 호출을 시뮬레이션하기 위한 지연
-  });
+  return response.json();
 }
 
 // 모든 프로젝트 가져오기 (이전 버전 호환성 유지)
 export async function fetchAllProjects(): Promise<Project[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(MOCK_PROJECTS);
-    }, 500);
-  });
+  const response = await fetch("/api/projects?limit=100");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch all projects");
+  }
+
+  const result = await response.json();
+  return result.data;
 }
 
 // 단일 프로젝트 가져오기
 export async function fetchProjectById(
   id: number
 ): Promise<Project | undefined> {
-  // 실제 API 호출로 대체 가능
-  // const response = await fetch(`/api/projects/${id}`);
-  // return response.json();
+  const response = await fetch(`/api/projects/${id}`);
 
-  // 현재는 목업 데이터에서 필터링 (API 호출 시뮬레이션)
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // id로 프로젝트 찾기
-      const project = MOCK_PROJECTS.find((p) => p.id === id);
-      resolve(project);
-    }, 500);
-  });
+  if (response.status === 404) {
+    return undefined;
+  }
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch project with ID: ${id}`);
+  }
+
+  return response.json();
 }

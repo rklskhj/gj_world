@@ -43,3 +43,10 @@ next-env.d.ts
 
 # Contentlayer
 .contentlayer
+
+# Firebase
+.firebase
+# Firebase 초기화 스크립트 (개발 도구)
+src/scripts/seed-firebase.js
+
+
