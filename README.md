@@ -4,7 +4,7 @@
 <div align="center">
   <h3>프로젝트 포트폴리오</h3>
   <a href="https://gj-world.vercel.app/" target="_blank">
-    GJ, WORLD (준비중)
+    GJ, WORLD
   </a>
 </div>
 <br/>
