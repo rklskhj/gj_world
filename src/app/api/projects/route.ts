@@ -4,18 +4,11 @@ import { fetchProjects, addProject } from "@/lib/api/firebase";
 // GET /api/projects - 프로젝트 목록 가져오기
 export async function GET(request: NextRequest) {
   try {
-    console.log("API request URL:", request.url);
-
     const searchParams = request.nextUrl.searchParams;
-    console.log(
-      "API searchParams:",
-      Object.fromEntries(searchParams.entries())
-    );
 
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "9");
 
-    // ids 파라미터가 있는지 확인 (예: ids=1,2,3)
     const idsParam = searchParams.get("ids");
     let ids: Array<string | number> | undefined = undefined;
 
@@ -25,10 +18,8 @@ export async function GET(request: NextRequest) {
         .split(",")
         .map((id) => id.trim())
         .filter((id) => id !== ""); // 빈 문자열 필터링
-      console.log("API parsed IDs:", ids);
     }
 
-    console.log("Fetching projects with IDs:", ids);
     const projects = await fetchProjects(page, limit, ids);
     return NextResponse.json(projects);
   } catch (error) {

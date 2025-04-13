@@ -38,8 +38,6 @@ export async function fetchProjects(
   // ids 배열이 있으면 URL에 추가
   if (ids && ids.length > 0) {
     url += `&ids=${ids.join(",")}`;
-    console.log("Client API call with IDs:", ids);
-    console.log("Constructed URL:", url);
   }
 
   // 실제 API 호출
