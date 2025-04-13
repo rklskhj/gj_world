@@ -29,10 +29,21 @@ export interface PaginatedResponse<T> {
 // 프로젝트 목록 페이지네이션 가져오기
 export async function fetchProjects(
   page = 1,
-  limit = 9
+  limit = 9,
+  ids?: Array<string | number>
 ): Promise<PaginatedResponse<Project>> {
+  // URL 매개변수 구성
+  let url = `/api/projects?page=${page}&limit=${limit}`;
+
+  // ids 배열이 있으면 URL에 추가
+  if (ids && ids.length > 0) {
+    url += `&ids=${ids.join(",")}`;
+    console.log("Client API call with IDs:", ids);
+    console.log("Constructed URL:", url);
+  }
+
   // 실제 API 호출
-  const response = await fetch(`/api/projects?page=${page}&limit=${limit}`);
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error("Failed to fetch projects");

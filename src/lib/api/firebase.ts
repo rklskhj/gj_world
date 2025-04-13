@@ -25,10 +25,35 @@ export interface PaginatedResponse<T> {
 // 프로젝트 목록 페이지네이션 가져오기
 export async function fetchProjects(
   page = 1,
-  pageSize = 9
+  pageSize = 9,
+  ids?: Array<string | number>
 ): Promise<PaginatedResponse<Project>> {
   try {
-    // 첫 페이지인 경우
+    // 특정 ID 배열이 제공된 경우
+    if (ids && ids.length > 0) {
+      const projects: Project[] = [];
+
+      // 각 ID에 대해 개별적으로 문서 가져오기
+      for (const id of ids) {
+        try {
+          const project = await fetchProjectById(id);
+          if (project) {
+            projects.push(project);
+          }
+        } catch (error) {
+          console.error(`Error fetching project with ID ${id}:`, error);
+        }
+      }
+
+      return {
+        data: projects,
+        nextPage: null, // ID 배열로 검색 시 페이지네이션 없음
+        totalPages: 1,
+        hasMore: false,
+      };
+    }
+
+    // 일반 페이지네이션 로직
     const projectsRef = collection(db, "projects");
     let projectsQuery;
 

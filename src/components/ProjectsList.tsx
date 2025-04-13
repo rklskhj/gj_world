@@ -7,6 +7,7 @@ import { OpenLink } from "@/components/OpenLink";
 import ScrollToTop from "@/components/ScrollToTop";
 import { useEffect, useRef, useCallback } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
+import { useSearchParams } from "next/navigation";
 
 /**
  * ProjectsList 컴포넌트
@@ -27,10 +28,22 @@ import BeatLoader from "react-spinners/BeatLoader";
  *    - 사용자 상호작용 -> Zustand 스토어 업데이트
  */
 export default function ProjectsList() {
+  // URL 쿼리 파라미터 가져오기
+  const searchParams = useSearchParams();
+  const idsParam = searchParams.get("ids");
+
+  // ids 파라미터가 있으면 배열로 변환
+  const ids = idsParam
+    ? idsParam
+        .split(",")
+        .map((id) => id.trim())
+        .filter((id) => id !== "")
+    : undefined;
+
   // React Query 훅을 사용하여 프로젝트 목록 데이터 가져오기
   // data: 프로젝트 배열, isLoading: 로딩 상태
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useProjects();
+    useProjects(9, ids);
 
   // Zustand 스토어에서 액션 함수 가져오기
   const { addRecentProject } = useProjectStore();

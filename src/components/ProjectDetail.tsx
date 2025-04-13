@@ -56,8 +56,8 @@ export default function ProjectDetail({ id }: ProjectDetailProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   // 아코디언 상태
-  const [isFuncExpanded, setIsFuncExpanded] = useState(false);
-  const [isTroubleExpanded, setIsTroubleExpanded] = useState(false);
+  const [isFuncExpanded, setIsFuncExpanded] = useState(true);
+  const [isTroubleExpanded, setIsTroubleExpanded] = useState(true);
 
   // 이전/다음 프로젝트 ID 계산
   const [prevProjectId, setPrevProjectId] = useState<number | null>(null);

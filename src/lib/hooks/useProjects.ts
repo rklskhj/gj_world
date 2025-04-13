@@ -32,12 +32,12 @@ import { Project } from "@/data/projects";
  */
 
 // 무한 스크롤로 프로젝트 가져오기
-export function useProjects(limit = 9) {
+export function useProjects(limit = 9, ids?: Array<string | number>) {
   return useInfiniteQuery<PaginatedResponse<Project>, Error>({
-    // 쿼리 키: 'projects'와 limit으로 식별되는 쿼리
-    queryKey: ["projects", limit],
+    // 쿼리 키: 'projects', limit, ids로 식별되는 쿼리
+    queryKey: ["projects", limit, ids],
     // 쿼리 함수: 페이지 정보를 받아 해당 페이지의 프로젝트 목록을 가져오는 API 호출
-    queryFn: ({ pageParam }) => fetchProjects(pageParam as number, limit),
+    queryFn: ({ pageParam }) => fetchProjects(pageParam as number, limit, ids),
     // 다음 페이지 파라미터 결정 함수
     getNextPageParam: (lastPage) => lastPage.nextPage,
     // 초기 페이지 파라미터
