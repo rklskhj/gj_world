@@ -18,7 +18,7 @@ export default function ProfileExperience() {
   // 스크롤 이벤트 리스너 추가
   useEffect(() => {
     // 브라우저 환경에서만 실행
-    setThreshold(window.innerHeight * 2.5); // 세 번째 섹션 이후
+    setThreshold(window.innerHeight * 1.5); // 세 번째 섹션 이후
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
