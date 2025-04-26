@@ -80,17 +80,21 @@ export default function ProfileAbout() {
             }}
           >
             <p className="text-xl text-gray-300 mb-8 leading-relaxed font-light">
-              안녕하세요, 저는 웹 개발에 열정을 가진 프론트엔드 개발자입니다.
-              사용자 친화적인 인터페이스와 매끄러운 사용자 경험을 만드는 것에
-              집중하고 있습니다.
+              안녕하세요, 기발함을 개발하는 개발자 Noveloper 김혁진입니다. 저는
+              2년 차 프론트엔드 개발자로, 약 2년간 5개 이상의 프로젝트에
+              참여하며 안정적인 서비스 운영과 지속적인 개선에 기여해왔습니다.
             </p>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed font-light">
-              React, Next.js, TypeScript를 주로 사용하며, 최신 웹 기술과
-              트렌드를 꾸준히 학습하고 적용하고 있습니다.
+              개발은 JavaScript와 React로 시작했으며, 실무에서는 Vue.js를
+              활용하여 다양한 서비스를 구축했습니다. 현재는 Next.js와
+              TypeScript를 중심으로 개인 프로젝트를 진행하며 기술 스택을
+              확장하고 있습니다. 또한, Cursor와 같은 AI 도구와 협업하며 효율적인
+              개발 환경을 만들어가는 것을 선호합니다.
             </p>
             <p className="text-xl text-gray-300 leading-relaxed font-light">
-              저는 팀과의 협업을 중요시하며, 함께 성장하는 환경에서 일하는 것을
-              선호합니다.
+              개발은 혼자가 아닌 함께하는 과정이라고 믿습니다. 다양한 팀과
+              적극적으로 소통하고 협력하며, 창의적인 아이디어를 현실로
+              만들어가는 개발자입니다.
             </p>
           </MotionDiv>
         </div>
