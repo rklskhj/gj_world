@@ -2,14 +2,21 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { FaReact, FaNodeJs, FaGitAlt } from "react-icons/fa";
+import { FaReact, FaAws, FaDatabase } from "react-icons/fa";
 import {
   SiNextdotjs,
   SiTypescript,
-  SiFirebase,
   SiTailwindcss,
-  SiMongodb,
-  SiExpress,
+  SiVuedotjs,
+  SiVercel,
+  SiStyledcomponents,
+  SiReactquery,
+  SiRecoil,
+  SiDjango,
+  SiFirebase,
+  SiPrisma,
+  SiPostgresql,
+  SiJest,
 } from "react-icons/si";
 
 // 타입 정의
@@ -44,7 +51,6 @@ export default function ProfileSkills() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ProfileAbout과 동일한 스크롤 감지 방식 추가
   const inView = scrollY > threshold;
 
   // 아이콘 정의
@@ -52,12 +58,20 @@ export default function ProfileSkills() {
     React: <FaReact className="text-blue-400" />,
     "Next.js": <SiNextdotjs className="text-white" />,
     TypeScript: <SiTypescript className="text-blue-500" />,
+    "Vue.js": <SiVuedotjs className="text-green-500" />,
     TailwindCSS: <SiTailwindcss className="text-cyan-400" />,
-    "Node.js": <FaNodeJs className="text-green-500" />,
-    Express: <SiExpress className="text-gray-200" />,
-    MongoDB: <SiMongodb className="text-green-400" />,
-    Firebase: <SiFirebase className="text-amber-500" />,
-    Git: <FaGitAlt className="text-red-500" />,
+    "Styled Components": <SiStyledcomponents className="text-pink-500" />,
+    "React-Query": <SiReactquery className="text-red-500" />,
+    Zustand: <FaDatabase className="text-yellow-500" />,
+    Vuex: <FaDatabase className="text-green-400" />,
+    Recoil: <SiRecoil className="text-blue-300" />,
+    AWS: <FaAws className="text-orange-400" />,
+    Vercel: <SiVercel className="text-white" />,
+    Django: <SiDjango className="text-green-600" />,
+    Firebase: <SiFirebase className="text-yellow-500" />,
+    Prisma: <SiPrisma className="text-blue-600" />,
+    PostgreSQL: <SiPostgresql className="text-blue-400" />,
+    Jest: <SiJest className="text-red-600" />,
   };
 
   return (
@@ -75,38 +89,57 @@ export default function ProfileSkills() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <SkillCategory
-            title="Frontend"
+            title="Front-End"
             skills={[
-              { name: "React", level: 90, icon: skillIcons["React"] },
-              { name: "Next.js", level: 85, icon: skillIcons["Next.js"] },
-              { name: "TypeScript", level: 80, icon: skillIcons["TypeScript"] },
+              { name: "React", level: 85, icon: skillIcons["React"] },
+              { name: "Vue.js", level: 85, icon: skillIcons["Vue.js"] },
+              { name: "Next.js", level: 80, icon: skillIcons["Next.js"] },
+              { name: "TypeScript", level: 75, icon: skillIcons["TypeScript"] },
+            ]}
+            isVisible={inView}
+          />
+          <SkillCategory
+            title="State Management"
+            skills={[
+              {
+                name: "React-Query",
+                level: 80,
+                icon: skillIcons["React-Query"],
+              },
+              { name: "Zustand", level: 80, icon: skillIcons["Zustand"] },
+              { name: "Vuex", level: 85, icon: skillIcons["Vuex"] },
+              { name: "Recoil", level: 78, icon: skillIcons["Recoil"] },
+            ]}
+            isVisible={inView}
+          />
+          <SkillCategory
+            title="Back-End"
+            skills={[
+              { name: "Django", level: 70, icon: skillIcons["Django"] },
+              { name: "Firebase", level: 80, icon: skillIcons["Firebase"] },
+              { name: "Prisma", level: 70, icon: skillIcons["Prisma"] },
+              { name: "PostgreSQL", level: 72, icon: skillIcons["PostgreSQL"] },
+              { name: "Jest", level: 75, icon: skillIcons["Jest"] },
+            ]}
+            isVisible={inView}
+          />
+          <SkillCategory
+            title="DevOps & Styling"
+            skills={[
+              { name: "AWS", level: 80, icon: skillIcons["AWS"] },
+              { name: "Vercel", level: 85, icon: skillIcons["Vercel"] },
               {
                 name: "TailwindCSS",
-                level: 95,
+                level: 85,
                 icon: skillIcons["TailwindCSS"],
               },
-            ]}
-            isVisible={inView}
-          />
-          <SkillCategory
-            title="Backend"
-            skills={[
-              { name: "Node.js", level: 75, icon: skillIcons["Node.js"] },
-              { name: "Express", level: 70, icon: skillIcons["Express"] },
-              { name: "MongoDB", level: 65, icon: skillIcons["MongoDB"] },
-              { name: "Firebase", level: 80, icon: skillIcons["Firebase"] },
-            ]}
-            isVisible={inView}
-          />
-          <SkillCategory
-            title="Others"
-            skills={[
-              { name: "Git", level: 85, icon: skillIcons["Git"] },
-              { name: "UI/UX Design", level: 70 },
-              { name: "Responsive Design", level: 90 },
-              { name: "Performance Optimization", level: 75 },
+              {
+                name: "Styled Components",
+                level: 85,
+                icon: skillIcons["Styled Components"],
+              },
             ]}
             isVisible={inView}
           />
@@ -119,7 +152,7 @@ export default function ProfileSkills() {
 // 기술 카테고리 컴포넌트 - 애플 스타일의 카드와 애니메이션
 function SkillCategory({ title, skills, isVisible }: SkillCategoryProps) {
   return (
-    <div className="bg-white/5 backdrop-blur-lg p-10 rounded-3xl border border-white/10 hover:border-white/20 transition-all shadow-xl">
+    <div className="bg-white/5 backdrop-blur-lg p-10 rounded-3xl border border-white/10 hover:border-white/20 transition-all shadow-xl min-h-[520px] flex flex-col">
       <motion.div
         animate={{
           opacity: isVisible ? 1 : 0,
@@ -127,37 +160,44 @@ function SkillCategory({ title, skills, isVisible }: SkillCategoryProps) {
         }}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="text-2xl font-bold mb-8">{title}</h3>
-        <div className="space-y-8">
-          {skills.map((skill: Skill) => (
-            <div key={skill.name}>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <div className="flex justify-between items-center mb-3">
-                  <div className="flex items-center gap-3">
-                    {skill.icon && <div className="text-xl">{skill.icon}</div>}
-                    <span className="font-medium">{skill.name}</span>
+        <div className="h-full flex flex-col">
+          <h3 className="text-2xl font-bold mb-8 min-h-[64px] flex items-center">
+            {title}
+          </h3>
+          <div className="space-y-8 flex-1">
+            {skills.map((skill: Skill) => (
+              <div key={skill.name}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <div className="flex justify-between items-center mb-3">
+                    <div className="flex items-center gap-3">
+                      {skill.icon && (
+                        <div className="text-xl">{skill.icon}</div>
+                      )}
+                      <span className="font-medium">{skill.name}</span>
+                    </div>
+                    <span className="text-blue-400 font-medium">
+                      {skill.level}%
+                    </span>
                   </div>
-                  <span className="text-blue-400 font-medium">
-                    {skill.level}%
-                  </span>
-                </div>
-                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                  <motion.div
-                    animate={{ width: isVisible ? `${skill.level}%` : "0%" }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    style={{
-                      height: "100%",
-                      background: "linear-gradient(to right, #3b82f6, #a855f7)",
-                      borderRadius: "9999px",
-                    }}
-                  />
-                </div>
-              </motion.div>
-            </div>
-          ))}
+                  <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                    <motion.div
+                      animate={{ width: isVisible ? `${skill.level}%` : "0%" }}
+                      transition={{ duration: 1.5, ease: "easeOut" }}
+                      style={{
+                        height: "100%",
+                        background:
+                          "linear-gradient(to right, #3b82f6, #a855f7)",
+                        borderRadius: "9999px",
+                      }}
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
