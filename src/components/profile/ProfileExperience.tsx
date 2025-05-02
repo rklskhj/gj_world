@@ -38,7 +38,7 @@ export default function ProfileExperience() {
   const inView = scrollY > threshold;
 
   return (
-    <section className="w-full min-h-screen py-20">
+    <section className="w-full min-h-screen py-40">
       <div className="max-w-7xl mx-auto px-4">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -57,9 +57,20 @@ export default function ProfileExperience() {
 
         <div className="space-y-20">
           <div>
-            <h3 className="text-3xl font-semibold mb-8 text-blue-400">
+            <motion.h3
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
+              transition={{ duration: 0.8 }}
+              style={{
+                fontSize: "1.875rem",
+                lineHeight: "2.25rem",
+                fontWeight: "600",
+                marginBottom: "2rem",
+                color: "#60A5FA",
+              }}
+            >
               Work Experience
-            </h3>
+            </motion.h3>
             <div className="space-y-16">
               {workExperience.map((exp) => (
                 <ExperienceCard key={exp.id} {...exp} isVisible={inView} />
@@ -68,9 +79,20 @@ export default function ProfileExperience() {
           </div>
 
           <div>
-            <h3 className="text-3xl font-semibold mb-8 text-purple-400">
+            <motion.h3
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
+              transition={{ duration: 0.8 }}
+              style={{
+                fontSize: "1.875rem",
+                lineHeight: "2.25rem",
+                fontWeight: "600",
+                marginBottom: "2rem",
+                color: "#C084FC",
+              }}
+            >
               Other Experience
-            </h3>
+            </motion.h3>
             <div className="space-y-16">
               {otherExperience.map((exp) => (
                 <ExperienceCard key={exp.id} {...exp} isVisible={inView} />

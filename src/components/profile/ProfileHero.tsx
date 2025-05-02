@@ -61,7 +61,7 @@ export default function ProfileHero() {
           animate={initialAnimation.p.animate}
           transition={initialAnimation.p.transition}
         >
-          <div className="text-xl md:text-2xl max-w-2xl mx-auto text-gray-300 mb-12 font-light">
+          <div className="text-xl md:text-2xl max-w-2xl mx-auto text-gray-300 mb-12 font-light break-keep">
             기발함을 개발하는 프론트엔드 개발자 김혁진입니다.
           </div>
         </MotionP>
