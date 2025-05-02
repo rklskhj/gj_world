@@ -36,7 +36,7 @@ export default function LandingOverlay() {
         </h1>
       </div>
       <div className="w-full flex justify-center relative z-20">
-        <Link href="/projects" className="z-10">
+        <Link href="/profile" className="z-10">
           <button className="p-[3px] relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-ai-blue via-ai-purple to-ai-pink rounded-sm pointer-events-none" />
             <div className="px-8 py-2 bg-black rounded-sm relative transition duration-200 text-white group-hover:bg-transparent font-bold">

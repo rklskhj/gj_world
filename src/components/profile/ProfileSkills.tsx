@@ -96,6 +96,7 @@ export default function ProfileSkills() {
               { name: "Vue.js", level: 85, icon: skillIcons["Vue.js"] },
               { name: "Next.js", level: 80, icon: skillIcons["Next.js"] },
               { name: "TypeScript", level: 75, icon: skillIcons["TypeScript"] },
+              { name: "Jest", level: 75, icon: skillIcons["Jest"] },
             ]}
             isVisible={inView}
           />
@@ -120,7 +121,6 @@ export default function ProfileSkills() {
               { name: "Firebase", level: 80, icon: skillIcons["Firebase"] },
               { name: "Prisma", level: 70, icon: skillIcons["Prisma"] },
               { name: "PostgreSQL", level: 72, icon: skillIcons["PostgreSQL"] },
-              { name: "Jest", level: 75, icon: skillIcons["Jest"] },
             ]}
             isVisible={inView}
           />

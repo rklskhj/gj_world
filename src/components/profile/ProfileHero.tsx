@@ -3,6 +3,7 @@
 import { MotionH1, MotionP, MotionDiv } from "./motion";
 import { useRef, useState, useEffect } from "react";
 import ScrollIndicator from "../common/ScrollIndicator";
+import Link from "next/link";
 
 export default function ProfileHero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -71,12 +72,19 @@ export default function ProfileHero() {
           transition={initialAnimation.buttons.transition}
         >
           <div className="flex gap-4">
-            <button className="px-10 py-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-600 transition-all hover:scale-105">
+            <Link
+              href="/projects"
+              className="px-10 py-4 rounded-full bg-blue-500 !text-white font-medium hover:bg-blue-600 transition-all hover:scale-105"
+            >
               프로젝트 보기
-            </button>
-            <button className="px-10 py-4 rounded-full bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 transition-all hover:scale-105">
+            </Link>
+            <Link
+              href="https://open.kakao.com/o/slJFWR2e"
+              target="_blank"
+              className="px-10 py-4 rounded-full bg-white/10 backdrop-blur-sm !text-white font-medium hover:bg-white/20 transition-all hover:scale-105"
+            >
               연락하기
-            </button>
+            </Link>
           </div>
         </MotionDiv>
       </section>

@@ -30,6 +30,7 @@ export default function Header() {
               </Link>
               <Link
                 href="https://open.kakao.com/o/slJFWR2e"
+                target="_blank"
                 className="mr-5 text-gray-100 hover:text-gray-500"
               >
                 <span className="max-md:hidden">CONTACT</span>📱

@@ -28,6 +28,7 @@ export default function Footer() {
             <Link
               href="https://coriny-gjkim.tistory.com/"
               className="text-gray-500"
+              target="_blank"
             >
               <svg
                 fill="currentColor"
@@ -43,6 +44,7 @@ export default function Footer() {
             <Link
               href="https://github.com/rklskhj"
               className="ml-3 text-gray-500"
+              target="_blank"
             >
               <svg
                 fill="currentColor"
@@ -58,6 +60,7 @@ export default function Footer() {
             <Link
               href="https://www.instagram.com/hyukji_n/"
               className="ml-3 text-gray-500"
+              target="_blank"
             >
               <svg
                 fill="none"
@@ -75,6 +78,7 @@ export default function Footer() {
             <Link
               href="https://www.youtube.com/@geungjeong_kim"
               className="ml-3 text-gray-500"
+              target="_blank"
             >
               <svg
                 fill="currentColor"
