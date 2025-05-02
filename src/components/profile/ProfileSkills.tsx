@@ -75,9 +75,8 @@ export default function ProfileSkills() {
   };
 
   return (
-    <section className="w-full relative">
+    <section className="w-full min-h-screen relative">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/20 to-black z-0"></div>
-
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="text-5xl font-bold mb-12 text-center">
           <motion.div

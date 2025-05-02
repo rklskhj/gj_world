@@ -1,11 +1,24 @@
 "use client";
 
 import { MotionH1, MotionP, MotionDiv } from "./motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import ScrollIndicator from "../common/ScrollIndicator";
 
 export default function ProfileHero() {
-  // 스크롤 위치 감지를 위한 ref
   const sectionRef = useRef<HTMLElement>(null);
+  const [showIndicator, setShowIndicator] = useState(true);
+
+  // 스크롤 이벤트 리스너 추가
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      // 첫 번째 섹션을 벗어나면 인디케이터를 숨김
+      setShowIndicator(scrollPosition < window.innerHeight);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // 시작 애니메이션은 그대로 유지
   const initialAnimation = {
@@ -27,10 +40,10 @@ export default function ProfileHero() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center min-h-screen">
       <section
         ref={sectionRef}
-        className="w-full py-32 flex flex-col items-center justify-center text-center px-4"
+        className="w-full h-full py-32 flex flex-col items-center justify-center text-center px-4"
       >
         <MotionH1
           initial={initialAnimation.h1.initial}
@@ -66,25 +79,8 @@ export default function ProfileHero() {
             </button>
           </div>
         </MotionDiv>
-
-        {/* 애플 스타일 스크롤 다운 인디케이터 */}
-        {/* <MotionDiv
-          animate={{
-            y: [0, 10, 0],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "loop",
-          }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-3 bg-white rounded-full animate-pulse"></div>
-          </div>
-        </MotionDiv> */}
       </section>
+      {showIndicator && <ScrollIndicator />}
     </div>
   );
 }

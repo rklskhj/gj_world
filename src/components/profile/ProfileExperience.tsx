@@ -38,7 +38,7 @@ export default function ProfileExperience() {
   const inView = scrollY > threshold;
 
   return (
-    <section className="w-full py-20">
+    <section className="w-full min-h-screen py-20">
       <div className="max-w-7xl mx-auto px-4">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}

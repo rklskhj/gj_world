@@ -31,7 +31,7 @@ export default function ProfileAbout() {
   const xOffset = inView ? 0 : -30;
 
   return (
-    <section ref={sectionRef} className="w-full">
+    <section ref={sectionRef} className="w-full min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center mx-auto max-w-7xl px-4">
         <div className="relative h-[600px] rounded-3xl overflow-hidden md:order-2">
           <MotionDiv
