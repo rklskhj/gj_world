@@ -21,10 +21,10 @@ export default function LandingOverlay() {
     <div className="absolute top-0 z-20 w-full h-full flex flex-col justify-center text-center">
       <div className="flex flex-col items-center justify-center">
         <span className="absolute z-10 mx-auto text-white flex font-bold text-center text-xs md:text-xl">
-          무한한 가능성을 가진 개발자, 김혁진입니다.
+          기발함을 개발하는 프론트엔드 개발자, 김혁진입니다.
         </span>
         <span className="relative top-0 w-fit h-auto justify-center blur-sm flex bg-gradient-to-r items-center from-ai-blue via-ai-purple to-ai-pink bg-clip-text font-bold text-transparent text-center select-auto text-xs md:text-xl">
-          무한한 가능성을 가진 개발자, 김혁진입니다.
+          기발함을 개발하는 프론트엔드 개발자, 김혁진입니다.
         </span>
       </div>
       <div className="flex flex-col items-center justify-center">
