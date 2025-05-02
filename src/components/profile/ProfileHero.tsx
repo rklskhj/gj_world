@@ -13,7 +13,7 @@ export default function ProfileHero() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       // 첫 번째 섹션을 벗어나면 인디케이터를 숨김
-      setShowIndicator(scrollPosition < window.innerHeight);
+      setShowIndicator(scrollPosition < window.innerHeight * 0.2);
     };
 
     window.addEventListener("scroll", handleScroll);
